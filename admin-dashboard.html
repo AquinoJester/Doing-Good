@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Doing Good</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="admin-dashboard-page">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">
+      <h2>Doing Good <span>Admin</span></h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#dashboard" class="nav-item active" data-page="dashboard">
+        <i class="fa-solid fa-chart-line"></i> Dashboard
+      </a>
+      <a href="#orders" class="nav-item" data-page="orders">
+        <i class="fa-solid fa-boxes"></i> Orders
+      </a>
+      <a href="#customers" class="nav-item" data-page="customers">
+        <i class="fa-solid fa-users"></i> Customers
+      </a>
+      <a href="#settings" class="nav-item" data-page="settings">
+        <i class="fa-solid fa-cog"></i> Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn" class="logout-btn">
+        <i class="fa-solid fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    <!-- HEADER -->
+    <header class="admin-header">
+      <div class="header-left">
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+
+      <div class="header-right">
+        <div class="admin-profile">
+          <img src="https://via.placeholder.com/40" alt="Admin" class="profile-pic">
+          <div class="profile-info">
+            <p id="adminName">Admin</p>
+            <small id="adminEmail">admin@doinggood.com</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <div class="admin-content">
+      <!-- DASHBOARD PAGE -->
+      <section id="dashboard-page" class="page active">
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-icon orders">
+              <i class="fa-solid fa-boxes"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Total Orders</h3>
+              <p class="stat-number" id="totalOrders">0</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon revenue">
+              <i class="fa-solid fa-peso-sign"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Total Revenue</h3>
+              <p class="stat-number" id="totalRevenue">₱0</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon pending">
+              <i class="fa-solid fa-hourglass-end"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Pending Orders</h3>
+              <p class="stat-number" id="pendingOrders">0</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon delivered">
+              <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+              <h3>Delivered</h3>
+              <p class="stat-number" id="deliveredOrders">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-section">
+          <h2>Recent Orders</h2>
+          <div id="recentOrdersList" class="orders-list">
+            <p class="empty-message">No orders yet</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDERS PAGE -->
+      <section id="orders-page" class="page">
+        <div class="page-actions">
+          <div class="search-bar">
+            <input 
+              type="text" 
+              id="orderSearch" 
+              placeholder="Search orders by customer name or email..."
+            >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+
+          <div class="filter-group">
+            <select id="statusFilter">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="ordersTableContainer" class="table-container">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="7" class="empty-message">Loading orders...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CUSTOMERS PAGE -->
+      <section id="customers-page" class="page">
+        <div class="customers-container">
+          <h2>Customer List</h2>
+          <div id="customersList" class="customers-list">
+            <p>Customer information will be displayed here once orders are placed.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS PAGE -->
+      <section id="settings-page" class="page">
+        <div class="settings-container">
+          <h2>Settings</h2>
+          <div class="settings-group">
+            <h3>Account Settings</h3>
+            <div class="setting-item">
+              <label>Current Password:</label>
+              <input type="password" placeholder="Enter current password">
+            </div>
+            <div class="setting-item">
+              <label>New Password:</label>
+              <input type="password" placeholder="Enter new password">
+            </div>
+            <div class="setting-item">
+              <label>Confirm Password:</label>
+              <input type="password" placeholder="Confirm new password">
+            </div>
+            <button class="btn-primary">Update Password</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ORDER DETAIL MODAL -->
+  <div id="orderModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+      
+      <h2>Order Details</h2>
+      <div id="orderDetailContent" class="order-detail">
+        <!-- Order details will be populated here -->
+      </div>
+
+      <div class="modal-actions">
+        <select id="orderStatusSelect" class="status-select">
+          <option value="">Update Status...</option>
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <button id="updateStatusBtn" class="btn-primary">Update Status</button>
+        <button id="deleteOrderBtn" class="btn-danger">Delete Order</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

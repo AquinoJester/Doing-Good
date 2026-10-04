@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login | Doing Good</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="admin-login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <h1>Doing Good</h1>
+        <p>Admin Panel</p>
+      </div>
+
+      <form id="adminLoginForm" class="login-form">
+        <div class="form-group">
+          <label for="username">
+            <i class="fa-solid fa-user"></i> Username
+          </label>
+          <input 
+            type="text" 
+            id="username" 
+            placeholder="Enter your username" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            <i class="fa-solid fa-lock"></i> Password
+          </label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Enter your password" 
+            required
+          >
+        </div>
+
+        <div class="form-group remember-me">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">Remember me</label>
+        </div>
+
+        <button type="submit" class="login-btn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <p>Demo Credentials:</p>
+        <p style="font-size: 12px; color: #666;">
+          Username: <strong>admin</strong><br>
+          Password: <strong>admin123</strong>
+        </p>
+      </div>
+
+      <div id="loginError" class="error-message" style="display: none;"></div>
+    </div>
+
+    <div class="login-sidebar">
+      <div class="sidebar-content">
+        <h2>Welcome Back</h2>
+        <p>Manage your store, track orders, and grow your business with our powerful admin dashboard.</p>
+        
+        <div class="features">
+          <div class="feature">
+            <i class="fa-solid fa-boxes"></i>
+            <h4>Order Management</h4>
+            <p>Track and manage customer orders in real-time</p>
+          </div>
+          
+          <div class="feature">
+            <i class="fa-solid fa-chart-line"></i>
+            <h4>Analytics</h4>
+            <p>Get insights into your sales and revenue</p>
+          </div>
+          
+          <div class="feature">
+            <i class="fa-solid fa-users"></i>
+            <h4>Customers</h4>
+            <p>View detailed customer information</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-login.js"></script>
+</body>
+</html>

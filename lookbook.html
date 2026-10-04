@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lookbook</title>
+  <link rel="stylesheet" href="lookbook.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Doing Good</div>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="shop.html">Shop <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+        </ul>
+      </li>
+      <li><a href="lookbook.html">Lookbook</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="nav-search-button" type="button" aria-label="Open product search" data-open-search>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      </button>
+      <i class="fa-regular fa-user" onclick="openAuthModal()" style="cursor: pointer;"></i>
+      <div class="cart-container" onclick="toggleCart()" style="cursor: pointer;">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="lookbook">
+    <h1>Lookbook</h1>
+    <p class="subtitle">Explore Our Seasonal Fashion Collections</p>
+    <a href="shop.html" class="btn">Shop the Looks</a>
+
+    <div class="collections">
+      <!-- Women's Looks -->
+      <div class="collection">
+        <h2>Women’s Looks</h2>
+        <div class="cards">
+          <div class="card">
+            <img src="images/blackgirl.jpg" alt="Effortless Summer">
+            <h3>Effortless Summer</h3>
+            <a href="shop.html?category=women">View the Gallery →</a>
+          </div>
+          <div class="card">
+            <img src="images/black&white.jpg" alt="Chic Neutrals">
+            <h3>Chic Neutrals</h3>
+            <a href="shop.html?category=women">View the Gallery →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Men's Looks -->
+      <div class="collection">
+        <h2>Men’s Looks</h2>
+        <div class="cards">
+          <div class="card">
+            <img src="images/lowkey.jpg" alt="Smart Casual">
+            <h3>Smart Casual</h3>
+            <a href="shop.html?category=men">View the Gallery →</a>
+          </div>
+          <div class="card">
+            <img src="images/bad.jpg" alt="Vacation Ready">
+            <h3>Vacation Ready</h3>
+            <a href="shop.html?category=men">View the Gallery →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="store-search" id="storeSearchDialog" role="dialog" aria-modal="true" aria-labelledby="storeSearchTitle" aria-hidden="true" hidden>
+  <div class="store-search__panel">
+    <header class="store-search__top">
+      <button class="store-search__back" type="button" aria-label="Close search" data-close-search>
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <form class="store-search__form" id="storeSearchForm" role="search">
+        <label class="visually-hidden" id="storeSearchTitle" for="storeSearchInput">Search Doing Good products</label>
+        <input id="storeSearchInput" type="search" placeholder="What are you looking for?" autocomplete="off" enterkeyhint="search">
+        <button type="submit" aria-label="Search products">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </button>
+      </form>
+    </header>
+
+    <nav class="store-search__quick-links" aria-label="Quick links">
+      <a href="shop.html"><i class="fa-solid fa-store" aria-hidden="true"></i> Store</a>
+      <a href="faq.html"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>
+    </nav>
+
+    <div class="store-search__content">
+      <div class="store-search__results" id="storeSearchResults" aria-live="polite" hidden></div>
+      <div class="store-search__discovery" id="storeSearchDiscovery">
+        <section class="store-search__section" aria-labelledby="storeSearchTrendingTitle">
+          <h2 id="storeSearchTrendingTitle">Trending</h2>
+          <div class="store-search__chips" id="storeSearchTrending"></div>
+        </section>
+        <section class="store-search__section" aria-labelledby="storeSearchHistoryTitle">
+          <div class="store-search__section-heading">
+            <h2 id="storeSearchHistoryTitle">Search History</h2>
+            <button class="store-search__clear" id="clearSearchHistory" type="button" hidden>Clear</button>
+          </div>
+          <div class="store-search__history" id="storeSearchHistory">
+            <p>You can see your search history here.</p>
+          </div>
+        </section>
+      </div>
+      <footer class="store-search__footer">
+        <p>Can't find what you're looking for?</p>
+        <a href="shop.html#shop-section">SEARCH BY CATEGORY</a>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>

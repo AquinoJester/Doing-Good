@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "T-Shirt",
+    "price": 899,
+    "category": "women"
+  },
+  {
+    "id": 2,
+    "name": "Classic T-Shirt",
+    "price": 499,
+    "category": "women"
+  },
+  {
+    "id": 3,
+    "name": "Brown Shirt",
+    "price": 999,
+    "category": "men"
+  },
+  {
+    "id": 4,
+    "name": "Brown Pants",
+    "price": 1299,
+    "category": "men"
+  }
+]

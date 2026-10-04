@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop | Doing Good</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shop.css">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ✅ CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close-btn" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total">Total: ₱0</div>
+    <button class="checkout-btn" onclick="openPaymentModal()">Proceed to Payment</button>
+  </div>
+</div>
+
+<!-- ✅ LOGIN/SIGNUP MODAL -->
+<div class="auth-modal" id="authModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+    
+    <!-- LOGIN TAB -->
+    <div class="auth-tab" id="loginTab">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" id="loginEmail" required>
+        <input type="password" placeholder="Password" id="loginPassword" required>
+        <button type="submit">Login</button>
+      </form>
+      
+      <div class="divider">OR</div>
+      
+      <div class="social-login">
+        <button type="button" class="social-btn google-btn" onclick="loginWithGoogle()">
+          <i class="fa-brands fa-google"></i> Google
+        </button>
+        <button type="button" class="social-btn facebook-btn" onclick="loginWithFacebook()">
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </button>
+      </div>
+      
+      <p>Don't have an account? <span class="tab-toggle" onclick="switchTab('signup')">Create Account</span></p>
+    </div>
+
+    <!-- SIGNUP TAB -->
+    <div class="auth-tab" id="signupTab" style="display:none;">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <input type="text" placeholder="Full Name" id="signupName" required>
+        <input type="email" placeholder="Email" id="signupEmail" required>
+        <input type="password" placeholder="Password" id="signupPassword" required>
+        <button type="submit">Create Account</button>
+      </form>
+      
+      <div class="divider">OR</div>
+      
+      <div class="social-login">
+        <button type="button" class="social-btn google-btn" onclick="signupWithGoogle()">
+          <i class="fa-brands fa-google"></i> Google
+        </button>
+        <button type="button" class="social-btn facebook-btn" onclick="signupWithFacebook()">
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </button>
+      </div>
+      
+      <p>Already have an account? <span class="tab-toggle" onclick="switchTab('login')">Login</span></p>
+    </div>
+
+    <!-- ACCOUNT TAB -->
+    <div class="auth-tab" id="accountTab" style="display:none;">
+      <div class="account-header">
+        <div class="account-avatar"><i class="fa-solid fa-user"></i></div>
+        <div class="account-info">
+          <h3 id="accountName">User Name</h3>
+          <p id="accountEmail">user@email.com</p>
+        </div>
+      </div>
+      
+      <button class="logout-btn" onclick="logoutUser()">
+        <i class="fa-solid fa-sign-out-alt"></i> Logout
+      </button>
+      
+      <div class="account-menu">
+        <a href="#" class="account-menu-item"><i class="fa-solid fa-box"></i> My Orders</a>
+        <a href="#" class="account-menu-item" onclick="openWishlistTab()"><i class="fa-solid fa-heart"></i> Wishlist</a>
+        <a href="#" class="account-menu-item"><i class="fa-solid fa-cog"></i> Settings</a>
+      </div>
+    </div>
+
+    <!-- WISHLIST TAB -->
+    <div class="auth-tab" id="wishlistTab" style="display:none;">
+      <h2>Your Wishlist</h2>
+      <div class="wishlist-items"></div>
+      <button class="back-account-btn" onclick="openAccountTab()">← Back to Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ PAYMENT MODAL -->
+<div class="payment-modal" id="paymentModal">
+  <div class="payment-modal-content">
+    <button class="payment-modal-close" onclick="closePaymentModal()">&times;</button>
+    
+    <h2>Complete Your Purchase</h2>
+    
+    <div class="payment-sections">
+      <!-- ADDRESS SECTION -->
+      <div class="payment-section">
+        <h3>Shipping Address</h3>
+        <form id="addressForm">
+          <input type="text" placeholder="Full Name" id="shippingName" required>
+          <input type="email" placeholder="Email" id="shippingEmail" required>
+          <input type="tel" placeholder="Phone Number" id="shippingPhone" required>
+          <input type="text" placeholder="Address Line 1" id="shippingAddress1" required>
+          <input type="text" placeholder="Address Line 2 (Optional)" id="shippingAddress2">
+          <input type="text" placeholder="City" id="shippingCity" required>
+          <input type="text" placeholder="Province/State" id="shippingProvince" required>
+          <input type="text" placeholder="ZIP/Postal Code" id="shippingZip" required>
+          <select id="shippingCountry" required>
+            <option value="">Select Country</option>
+            <option value="PH">Philippines</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+          </select>
+        </form>
+      </div>
+      
+      <!-- ORDER SUMMARY -->
+      <div class="payment-section">
+        <h3>Order Summary</h3>
+        <div id="paymentItems" class="payment-items">
+          <!-- Items will be populated by JavaScript -->
+        </div>
+        <div class="payment-total" id="paymentTotal">Total: ₱0</div>
+      </div>
+      
+      <!-- PAYMENT SECTION -->
+      <div class="payment-section">
+        <h3>Payment Method</h3>
+        <div class="payment-method">
+          <div class="gcash-payment">
+            <h4>Pay with GCash</h4>
+            <p>Scan the QR code below with your GCash app</p>
+            <div class="qr-code-container">
+              <img src="images/gcash-qr.svg" alt="GCash QR Code" class="gcash-qr" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRjNGM0YzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdDYXNoIFFSPC90ZXh0Pjwvc3ZnPg=='">
+              <p class="qr-placeholder">GCash QR Code</p>
+            </div>
+            <p class="gcash-instructions">
+              1. Open your GCash app<br>
+              2. Tap "Scan QR"<br>
+              3. Scan this code<br>
+              4. Complete payment
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-actions">
+      <button class="confirm-payment-btn" onclick="confirmPayment()">Confirm Payment</button>
+      <button class="cancel-payment-btn" onclick="closePaymentModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="logo">Doing Good</div>
+
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="dropdown">
+      <a href="shop.html">Shop <i class="fa-solid fa-chevron-down"></i></a>
+      <ul class="dropdown-menu">
+        <li><a href="shop.html?category=men">Men</a></li>
+        <li><a href="shop.html?category=women">Women</a></li>
+      </ul>
+    </li>
+
+    <li><a href="lookbook.html">Lookbook</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="nav-search-button" type="button" aria-label="Open product search" data-open-search>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    </button>
+    <i class="fa-regular fa-user" onclick="openAuthModal()" style="cursor: pointer;"></i>
+
+    <!-- ✅ CART ICON OPENS SIDEBAR -->
+    <div class="cart-container" onclick="toggleCart()" style="cursor: pointer;">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-count">0</span>
+    </div>
+
+
+  </div>
+</header>
+
+<section class="shop-section" id="shop-section">
+
+<div class="filter-bar">
+  <select id="categoryFilter">
+    <option value="all">All Categories</option>
+    <option value="men">Men</option>
+    <option value="women">Women</option>
+  </select>
+
+  <select id="priceFilter">
+    <option value="default">Sort by Price</option>
+    <option value="low">Low to High</option>
+    <option value="high">High to Low</option>
+  </select>
+</div>
+
+<h1 class="shop-title">Shop Collection</h1>
+
+<div class="product-grid">
+
+  <div class="product-card" data-category="women" data-price="899">
+    <img src="images/black.jpg">
+    <h3>T-Shirt</h3>
+    <p>₱899</p>
+    <div class="product-actions">
+      <button>Add to Cart</button>
+      <select class="size-selector" style="display:none;">
+        <option value="">Select Size</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <button class="wishlist-button" title="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+  </div>
+
+  <div class="product-card" data-category="women" data-price="499">
+    <img src="images/blacki.jpg">
+    <h3>Classic T-Shirt</h3>
+    <p>₱499</p>
+    <div class="product-actions">
+      <button>Add to Cart</button>
+      <select class="size-selector" style="display:none;">
+        <option value="">Select Size</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <button class="wishlist-button" title="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+  </div>
+
+  <div class="product-card" data-category="men" data-price="999">
+    <img src="images/brown-shirt.jpg">
+    <h3>Brown Shirt</h3>
+    <p>₱999</p>
+    <div class="product-actions">
+      <button>Add to Cart</button>
+      <select class="size-selector" style="display:none;">
+        <option value="">Select Size</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <button class="wishlist-button" title="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+  </div>
+
+  <div class="product-card" data-category="men" data-price="1299">
+    <img src="images/brown-pants.jpg">
+    <h3>Brown Pants</h3>
+    <p>₱1,299</p>
+    <div class="product-actions">
+      <button>Add to Cart</button>
+      <select class="size-selector" style="display:none;">
+        <option value="">Select Size</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    </div>
+    <button class="wishlist-button" title="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+  </div>
+
+</div>
+</section>
+
+<!-- ✅ FILTER SCRIPT -->
+<script>
+const categoryFilter = document.getElementById("categoryFilter");
+const priceFilter = document.getElementById("priceFilter");
+const products = document.querySelectorAll(".product-card");
+const productGrid = document.querySelector(".product-grid");
+
+// ===== FILTER PRODUCTS =====
+function filterProducts() {
+  const categoryValue = categoryFilter.value;
+  const priceValue = priceFilter.value;
+  const searchValue = (new URLSearchParams(window.location.search).get('search') || '').trim().toLowerCase();
+  let productArray = Array.from(products);
+
+  productArray.forEach(product => {
+    const category = product.dataset.category;
+    const name = product.querySelector('h3')?.textContent.toLowerCase() || '';
+    const matchesCategory = categoryValue === "all" || category === categoryValue;
+    const matchesSearch = !searchValue || name.includes(searchValue);
+    product.style.display = matchesCategory && matchesSearch ? "" : "none";
+  });
+
+  if (priceValue !== "default") {
+    productArray.sort((a, b) => {
+      const priceA = parseInt(a.dataset.price);
+      const priceB = parseInt(b.dataset.price);
+      return priceValue === "low" ? priceA - priceB : priceB - priceA;
+    });
+    productArray.forEach(product => productGrid.appendChild(product));
+  }
+}
+
+// ===== LOAD CATEGORY FROM URL =====
+function loadCategoryFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryFromURL = urlParams.get('category');
+  
+  if (categoryFromURL && (categoryFromURL === 'men' || categoryFromURL === 'women')) {
+    categoryFilter.value = categoryFromURL;
+  }
+
+  filterProducts();
+}
+
+// ===== EVENT LISTENERS =====
+categoryFilter.addEventListener("change", filterProducts);
+priceFilter.addEventListener("change", filterProducts);
+
+// ===== LOAD ON PAGE READY =====
+document.addEventListener("DOMContentLoaded", loadCategoryFromURL);
+</script>
+
+<div class="store-search" id="storeSearchDialog" role="dialog" aria-modal="true" aria-labelledby="storeSearchTitle" aria-hidden="true" hidden>
+  <div class="store-search__panel">
+    <header class="store-search__top">
+      <button class="store-search__back" type="button" aria-label="Close search" data-close-search>
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <form class="store-search__form" id="storeSearchForm" role="search">
+        <label class="visually-hidden" id="storeSearchTitle" for="storeSearchInput">Search Doing Good products</label>
+        <input id="storeSearchInput" type="search" placeholder="What are you looking for?" autocomplete="off" enterkeyhint="search">
+        <button type="submit" aria-label="Search products">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </button>
+      </form>
+    </header>
+
+    <nav class="store-search__quick-links" aria-label="Quick links">
+      <a href="shop.html#shop-section"><i class="fa-solid fa-store" aria-hidden="true"></i> Store</a>
+      <a href="faq.html"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>
+    </nav>
+
+    <div class="store-search__content">
+      <div class="store-search__results" id="storeSearchResults" aria-live="polite" hidden></div>
+      <div class="store-search__discovery" id="storeSearchDiscovery">
+        <section class="store-search__section" aria-labelledby="storeSearchTrendingTitle">
+          <h2 id="storeSearchTrendingTitle">Trending</h2>
+          <div class="store-search__chips" id="storeSearchTrending"></div>
+        </section>
+        <section class="store-search__section" aria-labelledby="storeSearchHistoryTitle">
+          <div class="store-search__section-heading">
+            <h2 id="storeSearchHistoryTitle">Search History</h2>
+            <button class="store-search__clear" id="clearSearchHistory" type="button" hidden>Clear</button>
+          </div>
+          <div class="store-search__history" id="storeSearchHistory">
+            <p>You can see your search history here.</p>
+          </div>
+        </section>
+      </div>
+      <footer class="store-search__footer">
+        <p>Can't find what you're looking for?</p>
+        <a href="#shop-section">SEARCH BY CATEGORY</a>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ AUTHENTICATION & CART SYSTEM -->
+<script src="auth.js"></script>
+
+</body>
+</html>

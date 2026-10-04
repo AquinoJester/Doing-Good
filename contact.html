@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Doing Good customer support.">
+  <title>Contact Us | Doing Good</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+  <link rel="stylesheet" href="auth.css">
+  <script src="site-pages.js" defer></script>
+  <script src="auth.js" defer></script>
+</head>
+<body class="info-page">
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Doing Good home">Doing Good</a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <div class="nav-right"><button class="nav-search-button" type="button" aria-label="Open product search" data-open-search><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button><a class="cart-container" href="shop.html#shop-section" aria-label="View cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count">0</span></a></div>
+  </header>
+  <main class="info-main">
+    <a class="info-back" href="index.html">← Back to Home</a>
+    <header class="info-hero"><p class="info-eyebrow">HELP</p><h1>Contact Us</h1><p>We’re here to help with orders, fit questions, returns, and everyday support.</p></header>
+    <section class="info-cards" aria-label="Contact details">
+      <article class="info-card"><h2>Email</h2><p>hello@doinggood.ph</p></article>
+      <article class="info-card"><h2>Phone</h2><p>+63 917 123 4567</p></article>
+      <article class="info-card"><h2>Store hours</h2><p>Monday to Saturday, 9:00 AM to 6:00 PM (Philippine Time)</p></article>
+    </section>
+    <section class="info-section">
+      <h2>Send a message</h2>
+      <form class="info-form" data-contact-form data-formspree-endpoint="https://formspree.io/f/your-form-id">
+        <label for="contactName">Name
+          <input id="contactName" name="name" type="text" autocomplete="name" required maxlength="120">
+        </label>
+        <label for="contactEmail">Email
+          <input id="contactEmail" name="email" type="email" autocomplete="email" required maxlength="254">
+        </label>
+        <label for="contactMessage">Message
+          <textarea id="contactMessage" name="message" required minlength="10" maxlength="5000"></textarea>
+        </label>
+        <button class="info-button" type="submit">Send message</button>
+        <p class="info-form-status" data-contact-status role="status" aria-live="polite"></p>
+      </form>
+      <p class="info-callout">To connect this form on GitHub Pages, create a Formspree form, copy the form ID from the endpoint URL, and replace <strong>your-form-id</strong> in the form action. The form is ready for submission once that value is updated.</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer__columns"><div><h2>Doing <em>Good</em></h2><p>Conscious essentials for everyday living.</p></div><div><h3>SHOP</h3><ul data-footer-links="shop"></ul></div><div><h3>ABOUT</h3><ul data-footer-links="about"></ul></div><div><h3>HELP</h3><ul data-footer-links="help"></ul></div></div>
+    <div class="site-footer__back"><a href="index.html">Back to Home</a></div>
+    <div class="site-footer__bottom"><p>© 2026 Doing Good. All rights reserved.</p><a href="shop.html">Visit the Store</a></div>
+  </footer>
+</body>
+</html>

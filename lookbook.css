@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Georgia", serif;
+}
+
+body {
+  background-color: #faf7f4;
+  color: #333;
+}
+
+.lookbook {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.lookbook h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #666;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #efe6de;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 60px;
+}
+
+.collections {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.collection {
+  flex: 1;
+  min-width: 300px;
+}
+
+.collection h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  padding-bottom: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: 360;
+  object-fit: cover;
+  display: block;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin: 15px 0 8px;
+}
+
+.card a {
+  text-decoration: none;
+  color: #777;
+  font-size: 14px;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .collections {
+    flex-direction: column;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Smooth transition */
+.card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover animation */
+.card:hover {
+  transform: translateY(-10px); /* moves card up */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+}
+
+/* Optional: Image zoom effect */
+.card img {
+  width: 100%;
+  height: 360px; /* fixed missing px */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05); /* slight zoom */
+}

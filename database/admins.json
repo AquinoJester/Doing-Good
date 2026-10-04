@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@doinggood.com",
+    "password": "$2a$10$NJ0P.W1j8YrJr7PVKZFhne6sQEjXhD9YKhBbEMNHMjLcqVQj8pHYm",
+    "createdAt": "2026-10-04T20:41:30.555Z"
+  }
+]
